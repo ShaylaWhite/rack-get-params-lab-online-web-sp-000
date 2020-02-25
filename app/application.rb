@@ -20,28 +20,8 @@ class Application
 
     resp.finish
   end
-end
   
-  def call(env)
-    resp = Rack::Response.new
-    req = Rack::Request.new(env)
-    
-    if req.path.match(/cart/)
-      @@cart.each do |cart|
-        resp.write "{cart}\n"
-      end
-    elsif req.path.match(/search/)
-      search_term = req.params["q"]
-      resp.write handle_search(search_term)
-    else
-      resp.write "Path Not Found"
-    end
-    
-     resp.finish
-    end
-    
-  end
-
+  
   def handle_search(search_term)
     if @@items.include?(search_term)
       return "#{search_term} is one of our items"
@@ -49,4 +29,8 @@ end
       return "Couldn't find #{search_term}"
     end
   end
+  
+  
+  
+  
 end
