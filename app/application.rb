@@ -24,14 +24,23 @@ class Application
         end
       end 
       
-      
+   
+    elsif req.path.match(/add/)
+    search_item = req.params["item"]
+
+      if @@items.include? search_item
+       @@cart << search_item
+       resp.write "added #{search_item}"
+      else
+        resp.write "We don't have that item"
+      end
     else
       resp.write "Path Not Found"
     end
 
     resp.finish
-  end
-  
+    
+end
   
   def handle_search(search_term)
     if @@items.include?(search_term)
