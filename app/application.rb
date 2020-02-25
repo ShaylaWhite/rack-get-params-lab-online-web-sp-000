@@ -20,6 +20,13 @@ class Application
 
     resp.finish
   end
+  
+  
+  def call(env)
+    resp = Rack::Response.new
+    req = Rack::Request.new(env)
+    
+  end
 
   def handle_search(search_term)
     if @@items.include?(search_term)
